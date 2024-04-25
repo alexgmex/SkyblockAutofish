@@ -1,0 +1,2 @@
+# SkyblockAutofish
+test with opencv
