@@ -7,7 +7,7 @@ import requests
 
 # Declare sea creature chance as decimal and kill tolerance
 scc = 0.62
-kill_tol = 1
+kill_tol = 6
 
 # Declare constants
 fish_counter = 0
