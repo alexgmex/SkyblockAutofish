@@ -26,7 +26,7 @@ while True:
     _, fish_conf, _, _ = cv.minMaxLoc(fish_result)
 
     # If fish detected, reel in and reset counter
-    if fish_conf > 0.8:
+    if fish_conf > 0.6:
         fish_counter += scc
         f.reel(fish_counter, fish_conf, frames_without_fish)
         frames_without_fish = 0
@@ -44,10 +44,10 @@ while True:
     if frames_without_fish >= 200:
 
         frame = f.capture(True)
-        lavapool_result = cv.matchTemplate(frame, lavapool, cv.TM_CCOEFF_NORMED)
-        _, lavapool_conf, _, _ = cv.minMaxLoc(lavapool_result)
+        marker_result = cv.matchTemplate(frame, marker, cv.TM_CCOEFF_NORMED)
+        _, marker_conf, _, _ = cv.minMaxLoc(marker_result)
 
-        if lavapool_conf > 0.6:
+        if marker_conf > 0.4:
             print("No fish for a while. Fixing rod!")
             f.fix_rod(marker)
             frames_without_fish = 0
