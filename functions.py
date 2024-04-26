@@ -23,9 +23,12 @@ max_screen_y = round(midpoint_h + percentage*h)
 def track_reference(ref_img):
     
     # Initialise constant of proportionality, tolerance and error array
-    kp = 1.5
+    kp = 1
     tol = 10
     err = np.array([0,1000])
+
+    # Hide HUD with F1
+    pag.press('f1')
 
     # P control towards image while more than tol pixels away
     while np.linalg.norm(err) > tol:
@@ -38,6 +41,8 @@ def track_reference(ref_img):
             err[1] = max_loc[1] - pos[1]
             
             pag.move(kp*err[0], kp*err[1], 0.2)
+
+    pag.press('f1')
 
 
 

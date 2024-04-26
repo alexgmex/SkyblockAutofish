@@ -8,13 +8,13 @@ import requests
 # Declare sea creature chance as decimal and kill tolerance
 scc = 0.62
 kill_tol = 6
+quit_mode = True
 
 # Declare constants
 fish_counter = 0
 frames_without_fish = 0
 fish_notif = cv.imread("fishy.png",cv.COLOR_RGB2BGR)
 marker = cv.imread("marker.png",cv.COLOR_RGB2BGR)
-lavapool = cv.imread("lavapool.png",cv.COLOR_RGB2BGR)
 
 # Infinite loop
 while True:
@@ -57,6 +57,8 @@ while True:
             pag.press('1')
             cv.imwrite("push.png",frame)
             f.push_notification("Not in the nether anymore. Quitting program.", "push.png")
+            if quit_mode:
+                pag.hotkey('alt','f4')
             break
         
     cv.waitKey(1)
