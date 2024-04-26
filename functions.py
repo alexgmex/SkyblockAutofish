@@ -2,6 +2,7 @@ import cv2 as cv
 import numpy as np
 import pyautogui as pag
 from PIL import ImageGrab
+import requests
 
 # Monitor width and height
 w = 2560
@@ -70,8 +71,35 @@ def hype():
 
     pag.moveTo(None, 5000, 1, pag.easeOutQuad)
     pag.press('1')
-    for i in range(20):
-        cv.waitKey(np.random.randint(10,50))
+    for i in range(15):
+        cv.waitKey(np.random.randint(10,30))
         pag.rightClick()
     pag.press('3')
     pag.moveTo(None, 500, 1.5)
+
+
+
+# Fix fishing rod in the event of issue
+def fix_rod(ref_img):
+    track_reference(ref_img)
+    pag.press('1')
+    cv.waitKey(np.random.randint(10,50))
+    pag.press('3')
+    cv.waitKey(np.random.randint(10,50))
+    pag.rightClick()
+
+
+
+# Use pushover and requests to push iPhone notification
+def push_notification(message, img):
+    r = requests.post("https://api.pushover.net/1/messages.json", data = {
+    "token": open("pushover_token.txt","r").read(),
+    "user": open("pushover_user.txt","r").read(),
+    "message": message,
+    },
+
+    files = {
+    "attachment": ("image.jpg", open(img, "rb"), "image/png")
+    })
+
+    print(r.text)
